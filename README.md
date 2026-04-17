@@ -1,9 +1,10 @@
-
 # Row drag and drop between DataGrid and ListView
 
 To perform dragging between the ListView and SfDataGrid, by using the [GridRowDragDropController.Drop](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Interactivity.RowDragDropController.html#Syncfusion_WinForms_DataGrid_Interactivity_RowDragDropController_Drop) event and you must set the `AllowDrop` property as true in the `ListView` while doing the drag and drop operation from `SfDataGrid` with `ListView` control.
 
-```csharp
+## Sample
+
+```xaml
 this.listView.ItemDrag += ListView_ItemDrag;
 this.listView.DragEnter += ListView_DragEnter;
 this.listView.DragDrop += listView_DragDrop;
@@ -100,3 +101,15 @@ private void RowDragDropController_Drop(object sender, GridRowDropEventArgs e)
 ```
 
 ![Drag Drop Between Controls](Assets/DragDropBetweenControls_Image.png)
+
+## Requirements to run the demo
+
+* [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) or [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/)
+* Xamarin add-ons for Visual Studio (available via the Visual Studio installer).
+
+## Troubleshooting
+
+### Path too long exception
+
+If you are facing path too long exception when building this example project, close Visual Studio and rename the repository to short and build the project.
+
