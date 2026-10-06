@@ -1,15 +1,15 @@
-# Drag and drop rows between DataGrid and ListView in WinForms
+# Drag and drop rows between Data Grid and List View in WinForms
 
-This sample demonstrates how to drag and drop rows between a Syncfusion WinForms DataGrid (`SfDataGrid`) and a Windows Forms `ListView` control.
+This sample demonstrates how to drag and drop rows between a Syncfusion `WinForms Data Grid` and a Windows Forms `List View` control.
 
-The sample handles the drag-and-drop interaction using the `GridRowDragDropController.Drop` event from the DataGrid and the `ListView.ItemDrag`, `DragEnter`, and `DragDrop` events from the ListView.
+The sample handles the drag-and-drop interaction using the `GridRowDragDropController.Drop` event from the Data Grid and the `ListView.ItemDrag`, `DragEnter`, and `DragDrop` events from the ListView.
 
 ## Features
 
-- Drag rows from `SfDataGrid` to `ListView`
-- Drag rows from `ListView` to `SfDataGrid`
+- Drag rows from `Data Grid` to `List View`
+- Drag rows from `List View` to `Data Grid`
 - Keep the bound data source synchronized while moving records
-- Insert records above or below the target row in the DataGrid
+- Insert records above or below the target row in the Data Grid
 
 ## Screenshot
 
@@ -19,7 +19,7 @@ The sample handles the drag-and-drop interaction using the `GridRowDragDropContr
 
 - Visual Studio 2015 or later
 - .NET Framework 4.6.2 or later
-- Syncfusion WinForms DataGrid package
+- Syncfusion WinForms Data Grid package
 
 ## Project structure
 
