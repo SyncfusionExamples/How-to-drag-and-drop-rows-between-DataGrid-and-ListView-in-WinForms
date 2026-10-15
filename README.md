@@ -1,7 +1,22 @@
+# Drag and drop rows between Data Grid and List View in WinForms 
 
-# Row drag and drop between DataGrid and ListView
+Overview
+--------
+This sample shows how to implement row drag-and-drop between a WinForms ListView and Syncfusion's SfDataGrid using the GridRowDragDropController.Drop handler. It demonstrates dragging from the data grid into the ListView and from the ListView back into the data grid, including removing and inserting records in the underlying collections.
 
-To perform dragging between the ListView and SfDataGrid, by using the [GridRowDragDropController.Drop](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Interactivity.RowDragDropController.html#Syncfusion_WinForms_DataGrid_Interactivity_RowDragDropController_Drop) event and you must set the `AllowDrop` property as true in the `ListView` while doing the drag and drop operation from `SfDataGrid` with `ListView` control.
+Prerequisites
+-------------
+- .NET Framework / .NET compatible with the Syncfusion WinForms DataGrid control.
+- Syncfusion WinForms NuGet packages (SfDataGrid).
+- A WinForms project with a ListView and SfDataGrid on a form.
+
+How it works
+------------
+- The ListView raises ItemDrag, DragEnter and DragDrop events to start and handle drag operations.
+- The SfDataGrid uses RowDragDropController.Drop to accept drops from outside sources and to insert records into its collection.
+- When items move between controls, the underlying collection is updated (removed from source, inserted into destination).
+
+To perform dragging between the ListView and SfDataGrid, by using the [GridRowDragDropController.Drop](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Interactivity.RowDragDro[...]
 
 ```csharp
 this.listView.ItemDrag += ListView_ItemDrag;
@@ -97,6 +112,3 @@ private void RowDragDropController_Drop(object sender, GridRowDropEventArgs e)
         }
     }
 }
-```
-
-![Drag Drop Between Controls](Assets/DragDropBetweenControls_Image.png)
