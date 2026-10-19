@@ -1,22 +1,40 @@
-# Drag and drop rows between Data Grid and List View in WinForms 
+# Drag and drop rows between Data Grid and List View in WinForms  
 
-Overview
---------
-This sample shows how to implement row drag-and-drop between a WinForms ListView and Syncfusion's SfDataGrid using the GridRowDragDropController.Drop handler. It demonstrates dragging from the data grid into the ListView and from the ListView back into the data grid, including removing and inserting records in the underlying collections.
+To perform dragging between the ListView and Data Grid, by using the [GridRowDragDropController.Drop](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Interactivity.RowDragDropController.Drop) event you can detect when rows are dropped into the grid from an outside source and handle insertion or removal from the source collection.
 
-Prerequisites
--------------
-- .NET Framework / .NET compatible with the Syncfusion WinForms DataGrid control.
-- Syncfusion WinForms NuGet packages (SfDataGrid).
-- A WinForms project with a ListView and SfDataGrid on a form.
+This sample demonstrates how to drag data between a Windows Forms ListView and an Syncfusion SfDataGrid. The example covers both directions: dragging rows from the ListView into the DataGrid and dragging rows from the DataGrid into the ListView. It also shows how to maintain the data model and remove the item from the original source after the drop operation completes.
 
-How it works
-------------
-- The ListView raises ItemDrag, DragEnter and DragDrop events to start and handle drag operations.
-- The SfDataGrid uses RowDragDropController.Drop to accept drops from outside sources and to insert records into its collection.
-- When items move between controls, the underlying collection is updated (removed from source, inserted into destination).
+## Sample overview
 
-To perform dragging between the ListView and SfDataGrid, by using the [GridRowDragDropController.Drop](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Interactivity.RowDragDro[...]
+This sample is useful when you want to provide a seamless row drag-and-drop experience between two WinForms controls that represent data in different ways. The implementation uses the ListView drag/drop events and the SfDataGrid row drag/drop controller to identify the source, determine the target insertion position, and update the underlying data collection.
+
+## Structure
+
+- `Assets/DragDropBetweenControls_Image.png` - screenshot of the drag-and-drop sample.
+- `README.md` - sample description and usage notes.
+- Form files and supporting code - contains the WinForms controls, drag/drop event handlers, and data model for the sample.
+
+## Prerequisites
+
+Before running this sample, ensure that you have the following installed:
+
+- Visual Studio 2019 or later.
+- .NET Framework 4.6.1 or later.
+- Syncfusion WinForms DataGrid package or assembly reference, matching your project configuration.
+- Basic knowledge of WinForms drag-and-drop and `SfDataGrid` usage.
+
+## Version
+
+This sample has been created and validated with the Syncfusion WinForms DataGrid package used in WinForms projects. If you are using a different Syncfusion version, verify the API and namespace names in your installed package before building the sample.
+
+## How it works
+
+- The ListView begins the drag operation in the `ItemDrag` handler by calling `DoDragDrop`.
+- The receiving ListView handles the drop by checking the incoming `IDataObject` for data from the DataGrid, then adds the record(s) and removes the original item if needed.
+- The DataGrid handles the external drop using `GridRowDragDropController.Drop` and inserts the dropped rows into the `SourceCollection` at the appropriate index.
+- The sample uses `OrderInfo` objects and stores the dragged item in the `ListViewItem.Tag` so the original object can be identified and removed after a successful drag.
+
+## Code example
 
 ```csharp
 this.listView.ItemDrag += ListView_ItemDrag;
@@ -112,3 +130,7 @@ private void RowDragDropController_Drop(object sender, GridRowDropEventArgs e)
         }
     }
 }
+```
+
+## Sample output
+![Drag Drop Between Controls](Assets/DragDropBetweenControls_Image.png)
