@@ -1,12 +1,10 @@
 # Drag and drop rows between Data Grid and List View in WinForms  
 
-To perform dragging between the ListView and Data Grid, by using the [GridRowDragDropController.Drop](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Interactivity.RowDragDropController.Drop) event you can detect when rows are dropped into the grid from an outside source and handle insertion or removal from the source collection.
-
-This sample demonstrates how to drag data between a Windows Forms ListView and an Syncfusion SfDataGrid. The example covers both directions: dragging rows from the ListView into the DataGrid and dragging rows from the DataGrid into the ListView. It also shows how to maintain the data model and remove the item from the original source after the drop operation completes.
+To perform dragging between the List View and Data Grid, by using the [GridRowDragDropController.Drop](https://help.syncfusion.com/cr/windowsforms/Syncfusion.WinForms.DataGrid.Interactivity.RowDragDropController.html#Syncfusion_WinForms_DataGrid_Interactivity_RowDragDropController_Drop) event and you must set the `AllowDrop` property as true in the `List View` while doing the drag and drop operation from `Data Grid` with `List View` control.
 
 ## Sample overview
 
-This sample is useful when you want to provide a seamless row drag-and-drop experience between two WinForms controls that represent data in different ways. The implementation uses the ListView drag/drop events and the SfDataGrid row drag/drop controller to identify the source, determine the target insertion position, and update the underlying data collection.
+This sample is useful when you want to provide a seamless row drag-and-drop experience between two WinForms controls that represent data in different ways. The implementation uses the List View drag/drop events and the Data Grid row drag/drop controller to identify the source, determine the target insertion position, and update the underlying data collection.
 
 ## Structure
 
@@ -20,18 +18,18 @@ Before running this sample, ensure that you have the following installed:
 
 - Visual Studio 2019 or later.
 - .NET Framework 4.6.1 or later.
-- Syncfusion WinForms DataGrid package or assembly reference, matching your project configuration.
-- Basic knowledge of WinForms drag-and-drop and `SfDataGrid` usage.
+- Syncfusion WinForms Data Grid package or assembly reference, matching your project configuration.
+- Basic knowledge of WinForms drag-and-drop and `Data Grid` usage.
 
 ## Version
 
-This sample has been created and validated with the Syncfusion WinForms DataGrid package used in WinForms projects. If you are using a different Syncfusion version, verify the API and namespace names in your installed package before building the sample.
+This sample has been created and validated with the Syncfusion WinForms Data Grid package used in WinForms projects. If you are using a different Syncfusion version, verify the API and namespace names in your installed package before building the sample.
 
 ## How it works
 
-- The ListView begins the drag operation in the `ItemDrag` handler by calling `DoDragDrop`.
-- The receiving ListView handles the drop by checking the incoming `IDataObject` for data from the DataGrid, then adds the record(s) and removes the original item if needed.
-- The DataGrid handles the external drop using `GridRowDragDropController.Drop` and inserts the dropped rows into the `SourceCollection` at the appropriate index.
+- The List View begins the drag operation in the `ItemDrag` handler by calling `DoDragDrop`.
+- The receiving List View handles the drop by checking the incoming `IDataObject` for data from the Data Grid, then adds the record(s) and removes the original item if needed.
+- The Data Grid handles the external drop using `GridRowDragDropController.Drop` and inserts the dropped rows into the `SourceCollection` at the appropriate index.
 - The sample uses `OrderInfo` objects and stores the dragged item in the `ListViewItem.Tag` so the original object can be identified and removed after a successful drag.
 
 ## Code example
@@ -55,11 +53,11 @@ private void ListView_ItemDrag(object sender, ItemDragEventArgs e)
 
 private void listView_DragDrop(object sender, DragEventArgs e)
 {
-    // Orders being dropped into the ListView
+    // Orders being dropped into the List View
     var droppedRecords = new List&lt;OrderInfo&gt;();
     var draggedListViewItem = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
 
-    // Detect if the drag source is SfDataGrid
+    // Detect if the drag source is Data Grid
     bool isFromDataGrid = false;
     if (e.Data.GetDataPresent("Records"))
     {
@@ -71,7 +69,7 @@ private void listView_DragDrop(object sender, DragEventArgs e)
             foreach (var item in sequence) if (item is OrderInfo orderInSequence) droppedRecords.Add(orderInSequence);
     }
 
-    // If dragged from ListView, remove original and include its order
+    // If dragged from List View, remove original and include its order
     if (draggedListViewItem != null)
     {
         if (draggedListViewItem.Tag is OrderInfo orderFromTag)
@@ -79,11 +77,11 @@ private void listView_DragDrop(object sender, DragEventArgs e)
         listView.Items.Remove(draggedListViewItem);
     }
 
-    // Insert into ListView
+    // Insert into List View
     foreach (var order in droppedRecords)
         listView.Items.Add(new ListViewItem(order.ShipCountry ?? string.Empty) { Tag = order });
 
-    // If records came from SfDataGrid, remove them from the grid source
+    // If records came from Data Grid, remove them from the grid source
     if (isFromDataGrid)
     {
         var source = sfDataGrid1.View?.SourceCollection as IList;
